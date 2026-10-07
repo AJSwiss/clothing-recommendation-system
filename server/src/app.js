@@ -4,8 +4,12 @@ import bcrypt from 'bcryptjs';
 import {query} from './db.js';
 import {requireAuth, sign} from './auth.js';
 import {scoreItem} from './recommendationEngine.js';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 const app = express();
 app.use(cors()); app.use(express.json({limit:'100kb'}));
+const catalogImages = process.env.KAGGLE_DATA_PATH || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../kaggledata');
+app.use('/catalog-images', express.static(path.join(catalogImages, 'images')));
 const clean = (v) => typeof v === 'string' ? v.trim() : '';
 const arrays = (v) => Array.isArray(v) ? v.filter(x => typeof x === 'string').map(x => x.trim().toLowerCase()).slice(0,20) : [];
 async function context(userId) {
@@ -39,6 +43,7 @@ async function ranked(req) { const ctx=await context(req.user.id); let sql='SELE
 app.get('/api/discover/next',requireAuth,async(req,res,next)=>{try{res.json((await ranked({...req,user:req.user,query:{unseen:'1'}}))[0]||null)}catch(e){next(e)}});
 app.post('/api/discover/swipe',requireAuth,async(req,res,next)=>{try{const id=clean(req.body.itemId), action=req.body.action;if(!/^[0-9a-f-]{36}$/i.test(id)||!['like','dislike'].includes(action))return res.status(400).json({error:'Invalid swipe'});await query(`INSERT INTO user_interactions(user_id,item_id,interaction_type) VALUES($1,$2,$3) ON CONFLICT(user_id,item_id) DO UPDATE SET interaction_type=$3,created_at=now()`,[req.user.id,id,action]);res.json({ok:true,next:(await ranked({...req,user:req.user,query:{unseen:'1'}}))[0]||null})}catch(e){if(e.code==='23503')return res.status(404).json({error:'Item not found'});next(e)}});
 app.get('/api/recommendations',requireAuth,async(req,res,next)=>{try{const all=await ranked(req),page=Math.max(1,Number(req.query.page)||1),limit=Math.min(40,Math.max(1,Number(req.query.limit)||12));res.json({items:all.slice((page-1)*limit,page*limit),page,limit,total:all.length})}catch(e){next(e)}});
+app.get('/api/outfits',requireAuth,async(req,res,next)=>{try{const r=await query(`SELECT c.* FROM clothing_items c JOIN user_interactions ui ON ui.item_id=c.id WHERE ui.user_id=$1 AND ui.interaction_type='like' ORDER BY ui.created_at DESC`,[req.user.id]);res.json(r.rows)}catch(e){next(e)}});
 app.get('/api/items/:id',async(req,res,next)=>{try{const r=await query('SELECT * FROM clothing_items WHERE id=$1',[req.params.id]);if(!r.rowCount)return res.status(404).json({error:'Item not found'});res.json(r.rows[0])}catch(e){next(e)}});
 app.get('/api/items/:id/similar',async(req,res,next)=>{try{const r=await query('SELECT * FROM clothing_items WHERE id=$1',[req.params.id]);if(!r.rowCount)return res.status(404).json({error:'Item not found'});const x=r.rows[0],s=await query(`SELECT *, (CASE WHEN category=$1 THEN 3 ELSE 0 END + CASE WHEN color=$2 THEN 2 ELSE 0 END + CASE WHEN material=$3 THEN 2 ELSE 0 END + CASE WHEN style=$4 THEN 1 ELSE 0 END) AS similarity FROM clothing_items WHERE id<>$5 ORDER BY similarity DESC LIMIT 3`,[x.category,x.color,x.material,x.style,x.id]);res.json({item:x,similar:s.rows})}catch(e){next(e)}});
 app.get('/api/faq',(req,res)=>res.json([{question:'How does matching work?',answer:'Your onboarding choices are combined with patterns from likes and dislikes to produce a transparent 0–100 match score.'},{question:'Can I change my preferences?',answer:'Yes. Open your profile and submit the questionnaire again at any time.'},{question:'What does a swipe do?',answer:'Like and dislike teach the recommendation engine and remove that item from Discover.'}]));

@@ -19,6 +19,7 @@ services:
       JWT_SECRET: change-me-in-production
       PORT: 3000
     ports: ["3000:3000"]
+    volumes: [./kaggledata:/app/kaggledata:ro]
     depends_on:
       db: {condition: service_healthy}
 volumes:

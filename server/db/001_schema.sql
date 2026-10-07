@@ -12,8 +12,11 @@ CREATE TABLE IF NOT EXISTS user_preferences (
 CREATE TABLE IF NOT EXISTS clothing_items (
  id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, category TEXT NOT NULL,
  subcategory TEXT NOT NULL, gender_tag TEXT NOT NULL, color TEXT NOT NULL, style TEXT NOT NULL,
- material TEXT NOT NULL, image_url TEXT NOT NULL, price NUMERIC(10,2) NOT NULL, created_at TIMESTAMPTZ DEFAULT now()
+ material TEXT NOT NULL, image_url TEXT NOT NULL, price NUMERIC(10,2),
+ source_id INTEGER UNIQUE, created_at TIMESTAMPTZ DEFAULT now()
 );
+ALTER TABLE clothing_items ADD COLUMN IF NOT EXISTS source_id INTEGER;
+CREATE UNIQUE INDEX IF NOT EXISTS clothing_items_source_id_idx ON clothing_items(source_id) WHERE source_id IS NOT NULL;
 CREATE TABLE IF NOT EXISTS user_interactions (
  id UUID PRIMARY KEY DEFAULT gen_random_uuid(), user_id UUID REFERENCES users(id) ON DELETE CASCADE,
  item_id UUID REFERENCES clothing_items(id) ON DELETE CASCADE, interaction_type TEXT NOT NULL CHECK (interaction_type IN ('like','dislike')),
