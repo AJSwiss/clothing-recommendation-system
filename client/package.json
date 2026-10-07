@@ -1,1 +1,1 @@
-{"name":"thread-match-client","private":true,"version":"1.0.0","type":"module","scripts":{"dev":"vite","build":"vite build"},"dependencies":{"@vitejs/plugin-react":"^4.3.1","vite":"^5.4.8","react":"^18.3.1","react-dom":"^18.3.1"},"devDependencies":{}}
+{"name":"thread-match-client","private":true,"version":"1.0.0","type":"module","scripts":{"dev":"vite","build":"vite build"},"dependencies":{"@vitejs/plugin-react":"^4.3.1","react":"^18.3.1","react-dom":"^18.3.1","vite":"^8.3.3"}}
