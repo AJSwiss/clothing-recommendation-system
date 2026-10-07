@@ -1,0 +1,1 @@
+-- Catalog rows are imported from kaggledata/styles.csv by server/src/catalogImport.js.
