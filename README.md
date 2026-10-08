@@ -2,6 +2,106 @@
 
 Thread Match is a runnable clothing recommendation MVP. It combines onboarding preferences with explicit like/dislike history, returning a transparent 0-100 match score.
 
+## Directory
+
+- [Run locally](#run-locally)
+- [Project structure](#project-structure)
+- [App pages](#app-pages)
+  - [Sign in and registration](#sign-in-and-registration)
+  - [Onboarding](#onboarding)
+  - [Discover](#discover)
+  - [Suggested](#suggested)
+  - [Outfits](#outfits)
+  - [FAQ](#faq)
+- [Kaggle catalog data](#kaggle-catalog-data)
+- [Docker](#docker)
+- [API](#api)
+- [Tests](#tests)
+- [CI/CD](#cicd)
+
+## Project structure
+
+```text
+clothing-recommendation-system/
+├── .github/
+│   └── workflows/       # GitHub Actions CI and CD workflows
+├── client/
+│   ├── src/
+│   │   ├── main.jsx     # React pages and application components
+│   │   └── style.css    # Application styling and responsive layout
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.js
+├── kaggledata/
+│   ├── styles.csv       # Local catalog metadata
+│   └── images/          # Local catalog product images
+├── scripts/
+│   └── check-version.mjs
+├── server/
+│   ├── db/              # Database schema and initialization SQL
+│   ├── src/             # API, authentication, recommendations, and catalog logic
+│   ├── package.json
+│   └── ...              # Server tests and configuration
+├── .env.example
+├── docker-compose.yml
+├── Dockerfile
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+## App pages
+
+The application uses a shared top navigation bar after authentication. The sections below describe each page and include a placeholder where screenshots can be added later.
+
+### Sign in and registration
+
+The entry page lets returning users sign in with their email and password. New users can create an account by providing their first name, email, and password. The page displays validation and authentication errors without leaving the current view, and provides a link for switching between the two modes.
+
+> **Screenshot placeholder:** Paste a sign-in or registration screenshot here.
+>
+> <!-- Add an image below, for example: ![Sign in and registration](docs/images/auth.png) -->
+
+### Onboarding
+
+After creating an account, the onboarding flow asks users to select preferences across four categories: colors, shirt styles, pant styles, and materials. Each step uses selectable chips, shows progress through the four-step flow, and requires at least one selection before continuing. The final step saves the preferences and opens the main application.
+
+> **Screenshot placeholder:** Paste an onboarding screenshot here.
+>
+> <!-- Add an image below, for example: ![Onboarding](docs/images/onboarding.png) -->
+
+### Discover
+
+The Discover page presents a daily clothing recommendation in the “Daily Edit.” Users can inspect the item, like it, or dislike it. The card supports mouse and touch dragging: swiping right likes the item and swiping left dislikes it. After an action, the current card exits the screen and the next item loads in the same position. A loading placeholder is shown while the next item is being retrieved.
+
+> **Screenshot placeholder:** Paste a Discover page screenshot here.
+>
+> <!-- Add an image below, for example: ![Discover page](docs/images/discover.png) -->
+
+### Suggested
+
+The Suggested page displays a grid of recommended clothing items based on the user’s preferences and interaction history. The category filter can narrow the results to all items, tops, bottoms, shoes, socks, belts, or accessories. Selecting an item opens its expanded view, where users can review details, like or dislike the item, swipe through the expanded card, and view similar recommendations.
+
+> **Screenshot placeholder:** Paste a Suggested page screenshot here.
+>
+> <!-- Add an image below, for example: ![Suggested page](docs/images/suggested.png) -->
+
+### Outfits
+
+The Outfits page, also called Outfit Studio, lets users assemble an outfit from available clothing categories. Selectors are arranged in a responsive grid, and selected pieces are displayed together on a compact outfit canvas. This page helps users compare individual recommendations as a coordinated look.
+
+> **Screenshot placeholder:** Paste an Outfits page screenshot here.
+>
+> <!-- Add an image below, for example: ![Outfit Studio](docs/images/outfits.png) -->
+
+### FAQ
+
+The FAQ page contains expandable question-and-answer panels with information about the recommendation experience and how the application works. Each question can be opened independently so users can scan the topics without leaving the page.
+
+> **Screenshot placeholder:** Paste an FAQ page screenshot here.
+>
+> <!-- Add an image below, for example: ![FAQ page](docs/images/faq.png) -->
+
 ## Run locally
 
 1. Install Node.js 20+ and PostgreSQL, or start PostgreSQL with `docker compose up db`.
