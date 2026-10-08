@@ -62,3 +62,16 @@ All SQL uses parameterized queries. Inputs are bounded/validated, passwords use 
 ## Tests
 
 `npm test` runs the recommendation engine unit test with Jest. The API is structured for Supertest integration tests when a test database is available.
+
+## CI/CD
+
+GitHub Actions run on pull requests and pushes to `dev` and `main`. CI installs dependencies, runs the tests, builds the client, uploads the client build, and builds the production Docker image.
+
+Pull requests targeting `dev` or `main` must increase the root `package.json` version. Use a semantic version such as `1.0.1`, `1.1.0`, or `2.0.0`; the version check compares it with the target branch and fails when it is unchanged or lower. The same check runs on pushes to either branch, so direct pushes and merges cannot leave the branch at the previous version. Configure the `Version bump` check as a required status check in branch protection for both protected branches.
+
+After a merge to `main`, CD publishes the production image to GitHub Container Registry as `latest`, the commit SHA, and the application version:
+
+```text
+ghcr.io/<owner>/<repository>:latest
+ghcr.io/<owner>/<repository>:v<version>
+```
