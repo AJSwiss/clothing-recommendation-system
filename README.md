@@ -58,49 +58,45 @@ The application uses a shared top navigation bar after authentication. The secti
 
 The entry page lets returning users sign in with their email and password. New users can create an account by providing their first name, email, and password. The page displays validation and authentication errors without leaving the current view, and provides a link for switching between the two modes.
 
-> **Screenshot placeholder:** Paste a sign-in or registration screenshot here.
->
-> <!-- Add an image below, for example: ![Sign in and registration](docs/images/auth.png) -->
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/0cc1d377-d7a5-4c30-8282-eae3c731144d" />
 
 ### Onboarding
 
 After creating an account, the onboarding flow asks users to select preferences across four categories: colors, shirt styles, pant styles, and materials. Each step uses selectable chips, shows progress through the four-step flow, and requires at least one selection before continuing. The final step saves the preferences and opens the main application.
 
-> **Screenshot placeholder:** Paste an onboarding screenshot here.
->
-> <!-- Add an image below, for example: ![Onboarding](docs/images/onboarding.png) -->
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/0fac40d1-3742-4362-8b1a-c8e054b13df0" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/78814885-cd0a-4e8a-8e92-ac69094b0ff1" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/68fbf575-36a0-48cd-8245-6cce5fe8f524" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/c0b471d5-052f-4dc2-a1d9-a78b5ca5f8f0" />
+
 
 ### Discover
 
 The Discover page presents a daily clothing recommendation in the “Daily Edit.” Users can inspect the item, like it, or dislike it. The card supports mouse and touch dragging: swiping right likes the item and swiping left dislikes it. After an action, the current card exits the screen and the next item loads in the same position. A loading placeholder is shown while the next item is being retrieved.
 
-> **Screenshot placeholder:** Paste a Discover page screenshot here.
->
-> <!-- Add an image below, for example: ![Discover page](docs/images/discover.png) -->
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/b23be77c-6bbb-406d-b45b-499c7843bf74" />
+
 
 ### Suggested
 
 The Suggested page displays a grid of recommended clothing items based on the user’s preferences and interaction history. The category filter can narrow the results to all items, tops, bottoms, shoes, socks, belts, or accessories. Selecting an item opens its expanded view, where users can review details, like or dislike the item, swipe through the expanded card, and view similar recommendations.
 
-> **Screenshot placeholder:** Paste a Suggested page screenshot here.
->
-> <!-- Add an image below, for example: ![Suggested page](docs/images/suggested.png) -->
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/ac4d5b49-bdb7-4b42-bca8-d964f8c617f1" />
+
 
 ### Outfits
 
 The Outfits page, also called Outfit Studio, lets users assemble an outfit from available clothing categories. Selectors are arranged in a responsive grid, and selected pieces are displayed together on a compact outfit canvas. This page helps users compare individual recommendations as a coordinated look.
 
-> **Screenshot placeholder:** Paste an Outfits page screenshot here.
->
-> <!-- Add an image below, for example: ![Outfit Studio](docs/images/outfits.png) -->
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/84680ed7-11a2-4f1e-84a8-1e02ccec8d91" />
+
 
 ### FAQ
 
 The FAQ page contains expandable question-and-answer panels with information about the recommendation experience and how the application works. Each question can be opened independently so users can scan the topics without leaving the page.
 
-> **Screenshot placeholder:** Paste an FAQ page screenshot here.
->
-> <!-- Add an image below, for example: ![FAQ page](docs/images/faq.png) -->
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/3cef3124-c6fc-409d-9f21-214cb6bdbfb4" />
+
 
 ## Run locally
 
