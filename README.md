@@ -2,6 +2,104 @@
 
 Thread Match is a runnable clothing recommendation MVP. It combines onboarding preferences with explicit like/dislike history, returning a transparent 0-100 match score.
 
+## Directory
+
+- [Run locally](#run-locally)
+- [Project structure](#project-structure)
+- [App pages](#app-pages)
+  - [Sign in and registration](#sign-in-and-registration)
+  - [Onboarding](#onboarding)
+  - [Discover](#discover)
+  - [Suggested](#suggested)
+  - [Outfits](#outfits)
+  - [FAQ](#faq)
+- [Kaggle catalog data](#kaggle-catalog-data)
+- [Docker](#docker)
+- [API](#api)
+- [Tests](#tests)
+- [CI/CD](#cicd)
+
+## Project structure
+
+```text
+clothing-recommendation-system/
+├── .github/
+│   └── workflows/       # GitHub Actions CI and CD workflows
+├── client/
+│   ├── src/
+│   │   ├── main.jsx     # React pages and application components
+│   │   └── style.css    # Application styling and responsive layout
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.js
+├── kaggledata/
+│   ├── styles.csv       # Local catalog metadata
+│   └── images/          # Local catalog product images
+├── scripts/
+│   └── check-version.mjs
+├── server/
+│   ├── db/              # Database schema and initialization SQL
+│   ├── src/             # API, authentication, recommendations, and catalog logic
+│   ├── package.json
+│   └── ...              # Server tests and configuration
+├── .env.example
+├── docker-compose.yml
+├── Dockerfile
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+## App pages
+
+The application uses a shared top navigation bar after authentication. The sections below describe each page and include a placeholder where screenshots can be added later.
+
+### Sign in and registration
+
+The entry page lets returning users sign in with their email and password. New users can create an account by providing their first name, email, and password. The page displays validation and authentication errors without leaving the current view, and provides a link for switching between the two modes.
+
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/0cc1d377-d7a5-4c30-8282-eae3c731144d" />
+
+### Onboarding
+
+After creating an account, the onboarding flow asks users to select preferences across four categories: colors, shirt styles, pant styles, and materials. Each step uses selectable chips, shows progress through the four-step flow, and requires at least one selection before continuing. The final step saves the preferences and opens the main application.
+
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/0fac40d1-3742-4362-8b1a-c8e054b13df0" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/78814885-cd0a-4e8a-8e92-ac69094b0ff1" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/68fbf575-36a0-48cd-8245-6cce5fe8f524" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/c0b471d5-052f-4dc2-a1d9-a78b5ca5f8f0" />
+
+
+### Discover
+
+The Discover page presents a daily clothing recommendation in the “Daily Edit.” Users can inspect the item, like it, or dislike it. The card supports mouse and touch dragging: swiping right likes the item and swiping left dislikes it. After an action, the current card exits the screen and the next item loads in the same position. A loading placeholder is shown while the next item is being retrieved.
+
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/b23be77c-6bbb-406d-b45b-499c7843bf74" />
+
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/9efb96ce-5f6e-478b-9647-7e06e4738375" />
+
+
+### Suggested
+
+The Suggested page displays a grid of recommended clothing items based on the user’s preferences and interaction history. The category filter can narrow the results to all items, tops, bottoms, shoes, socks, belts, or accessories. Selecting an item opens its expanded view, where users can review details, like or dislike the item, swipe through the expanded card, and view similar recommendations.
+
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/ac4d5b49-bdb7-4b42-bca8-d964f8c617f1" />
+
+
+### Outfits
+
+The Outfits page, also called Outfit Studio, lets users assemble an outfit from available clothing categories. Selectors are arranged in a responsive grid, and selected pieces are displayed together on a compact outfit canvas. This page helps users compare individual recommendations as a coordinated look.
+
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/84680ed7-11a2-4f1e-84a8-1e02ccec8d91" />
+
+
+### FAQ
+
+The FAQ page contains expandable question-and-answer panels with information about the recommendation experience and how the application works. Each question can be opened independently so users can scan the topics without leaving the page.
+
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/3cef3124-c6fc-409d-9f21-214cb6bdbfb4" />
+
+
 ## Run locally
 
 1. Install Node.js 20+ and PostgreSQL, or start PostgreSQL with `docker compose up db`.
@@ -62,3 +160,16 @@ All SQL uses parameterized queries. Inputs are bounded/validated, passwords use 
 ## Tests
 
 `npm test` runs the recommendation engine unit test with Jest. The API is structured for Supertest integration tests when a test database is available.
+
+## CI/CD
+
+GitHub Actions run on pull requests and pushes to `dev` and `main`. CI installs dependencies, runs the tests, builds the client, uploads the client build, and builds the production Docker image.
+
+Pull requests targeting `dev` or `main` must increase the root `package.json` version. Use a semantic version such as `1.0.1`, `1.1.0`, or `2.0.0`; the version check compares it with the target branch and fails when it is unchanged or lower. The same check runs on pushes to either branch, so direct pushes and merges cannot leave the branch at the previous version. Configure the `Version bump` check as a required status check in branch protection for both protected branches.
+
+After a merge to `main`, CD publishes the production image to GitHub Container Registry as `latest`, the commit SHA, and the application version:
+
+```text
+ghcr.io/<owner>/<repository>:latest
+ghcr.io/<owner>/<repository>:v<version>
+```
