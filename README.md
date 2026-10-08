@@ -76,6 +76,8 @@ The Discover page presents a daily clothing recommendation in the “Daily Edit.
 
 <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/b23be77c-6bbb-406d-b45b-499c7843bf74" />
 
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/9efb96ce-5f6e-478b-9647-7e06e4738375" />
+
 
 ### Suggested
 
