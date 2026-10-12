@@ -159,7 +159,36 @@ All SQL uses parameterized queries. Inputs are bounded/validated, passwords use 
 
 ## Tests
 
-`npm test` runs the recommendation engine unit test with Jest. The API is structured for Supertest integration tests when a test database is available.
+Run the server and database-related tests from the repository root:
+
+```powershell
+npm test
+```
+
+This runs the Jest suite in `server`, including:
+
+- Recommendation scoring behavior
+- Database-backed API contracts with mocked database queries
+- Registration validation and authenticated preference persistence
+- Database schema tables, relationships, constraints, and indexes
+
+Run the webpage tests separately:
+
+```powershell
+npm test --workspace client
+```
+
+The client suite uses Vitest, jsdom, and Testing Library to verify the Suggested page expanded-item flow, including opening an item, keeping the close button above the transformed summary, and closing the expanded view.
+
+Run both test suites and the production client build with:
+
+```powershell
+npm test
+npm test --workspace client
+npm run build
+```
+
+The current test suite contains six server tests and one client test. Server database tests do not require a live PostgreSQL instance; schema assertions read `server/db/001_schema.sql`, and API tests mock the database query layer.
 
 ## CI/CD
 
