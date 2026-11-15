@@ -31,10 +31,10 @@ app.post('/api/auth/login', async (req,res,next)=>{try {
 } catch(e){next(e);}});
 app.get('/api/user/preferences',requireAuth,async(req,res,next)=>{try{const r=await query('SELECT * FROM user_preferences WHERE user_id=$1',[req.user.id]);res.json(r.rows[0]||null)}catch(e){next(e)}});
 app.post('/api/user/preferences',requireAuth,async(req,res,next)=>{try{
-  const vals=[arrays(req.body.colors),arrays(req.body.shirtStyles),arrays(req.body.pantStyles),arrays(req.body.materials)];
+  const vals=[arrays(req.body.genders),arrays(req.body.colors),arrays(req.body.shirtStyles),arrays(req.body.pantStyles),arrays(req.body.materials)];
   if(vals.some(x=>x.length<1)) return res.status(400).json({error:'Choose at least one value for every preference'});
-  const r=await query(`INSERT INTO user_preferences(user_id,preferred_colors,preferred_shirt_styles,preferred_pant_styles,preferred_materials) VALUES($1,$2,$3,$4,$5)
-  ON CONFLICT(user_id) DO UPDATE SET preferred_colors=$2,preferred_shirt_styles=$3,preferred_pant_styles=$4,preferred_materials=$5,updated_at=now() RETURNING *`,[req.user.id,...vals]);res.json(r.rows[0]);
+  const r=await query(`INSERT INTO user_preferences(user_id,preferred_genders,preferred_colors,preferred_shirt_styles,preferred_pant_styles,preferred_materials) VALUES($1,$2,$3,$4,$5,$6)
+  ON CONFLICT(user_id) DO UPDATE SET preferred_genders=$2,preferred_colors=$3,preferred_shirt_styles=$4,preferred_pant_styles=$5,preferred_materials=$6,updated_at=now() RETURNING *`,[req.user.id,...vals]);res.json(r.rows[0]);
 }catch(e){next(e)}});
 async function ranked(req) { const ctx=await context(req.user.id); let sql='SELECT c.* FROM clothing_items c', p=[], where=[];
  if(req.query.category){p.push(clean(req.query.category));where.push(`c.category=$${p.length}`)} if(req.query.subcategory){p.push(clean(req.query.subcategory));where.push(`c.subcategory=$${p.length}`)} if(req.query.gender_tag){p.push(clean(req.query.gender_tag));where.push(`c.gender_tag=$${p.length}`)}

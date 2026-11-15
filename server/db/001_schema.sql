@@ -5,10 +5,12 @@ CREATE TABLE IF NOT EXISTS users (
 );
 CREATE TABLE IF NOT EXISTS user_preferences (
  user_id UUID PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+ preferred_genders TEXT[] NOT NULL DEFAULT '{}',
  preferred_colors TEXT[] NOT NULL DEFAULT '{}', preferred_shirt_styles TEXT[] NOT NULL DEFAULT '{}',
  preferred_pant_styles TEXT[] NOT NULL DEFAULT '{}', preferred_materials TEXT[] NOT NULL DEFAULT '{}',
  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+ALTER TABLE user_preferences ADD COLUMN IF NOT EXISTS preferred_genders TEXT[] NOT NULL DEFAULT '{}';
 CREATE TABLE IF NOT EXISTS clothing_items (
  id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, category TEXT NOT NULL,
  subcategory TEXT NOT NULL, gender_tag TEXT NOT NULL, color TEXT NOT NULL, style TEXT NOT NULL,

@@ -141,7 +141,7 @@ Test-Path .\kaggledata\images
 
 Both commands should return `True`. Docker mounts this folder read-only, imports the catalog when the API starts, and serves the local product images.
 
-The SQL files in `server/db` are mounted into the Postgres container and create the schema on a fresh volume. On startup, the API imports the Myntra catalog from `kaggledata/styles.csv` and serves its matching images from `kaggledata/images`. To reset catalog data, run `docker compose down -v` and start it again.
+The SQL files in `server/db` are mounted into the Postgres container and create the schema on a fresh volume. The API also applies the `preferred_genders` compatibility migration at startup, so existing Postgres volumes gain that column without being deleted. On startup, the API imports the Myntra catalog from `kaggledata/styles.csv` and serves its matching images from `kaggledata/images`. To reset catalog data, run `docker compose down -v` and start it again.
 
 ## Docker
 

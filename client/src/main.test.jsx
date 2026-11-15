@@ -7,6 +7,7 @@ import {App} from './main.jsx';
 const item = {
   id: '11111111-1111-1111-1111-111111111111',
   name: "Skechers Men's Shoe",
+  gender: 'men',
   category: 'shoes',
   subcategory: 'casual-shoes',
   color: 'black',
