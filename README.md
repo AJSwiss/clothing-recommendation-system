@@ -52,7 +52,7 @@ clothing-recommendation-system/
 
 ## App pages
 
-The application uses a shared top navigation bar after authentication. The sections below describe each page and include a placeholder where screenshots can be added later.
+The application uses a shared top navigation bar after authentication. The sections below describe each page and include screenshot examples.
 
 ### Sign in and registration
 
