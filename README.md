@@ -1,6 +1,6 @@
 # Thread Match
 
-Thread Match is a runnable clothing recommendation MVP. It combines onboarding preferences with explicit like/dislike history, returning a transparent 0-100 match score.
+Thread Match is a runnable clothing recommendation MVP. It combines onboarding preferences during account creation with explicit like/dislike history, returning a transparent 0-100 match score.
 
 ## Directory
 
