@@ -1,3 +1,6 @@
 node_modules/
 .env
 client/dist/
+kaggledata/
+.DS_Store
+*.log

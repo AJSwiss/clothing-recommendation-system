@@ -30,7 +30,7 @@ describe('database-backed API contracts', () => {
     const response = await request(app)
       .post('/api/user/preferences')
       .set('Authorization', `Bearer ${sign('user-1')}`)
-      .send({colors: [' Black ', 'BLACK'], shirtStyles: ['T-Shirt'], pantStyles: ['straight-leg'], materials: ['Cotton']});
+      .send({genders: ['men'], colors: [' Black ', 'BLACK'], shirtStyles: ['T-Shirt'], pantStyles: ['straight-leg'], materials: ['Cotton']});
 
     expect(response.status).toBe(200);
     expect(query).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO user_preferences'), [

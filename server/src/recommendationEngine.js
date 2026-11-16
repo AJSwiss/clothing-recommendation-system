@@ -1,4 +1,4 @@
-const fields = ['color','style','material'];
+const fields = ['gender','color','style','material'];
 const arr = (v) => Array.isArray(v) ? v.map(String).map(x => x.toLowerCase()) : [];
 export function scoreItem(item, preferences = {}, signals = {likes: [], dislikes: []}) {
   const explicit = fields.reduce((n, field) => n + (arr(preferences[`preferred_${field === 'style' ? 'shirt_styles' : field + 's'}`]).includes(String(item[field]).toLowerCase()) ? 1 : 0), 0) / 3;
