@@ -178,6 +178,17 @@ Run the webpage tests separately:
 npm test --workspace client
 ```
 
+### Smoke test
+
+After starting the app (for example with `docker compose up --build`), check that the running instance works end to end:
+
+```powershell
+npm run smoke                              # defaults to http://localhost:3000
+npm run smoke -- http://my-host:3000       # or point it at another instance
+```
+
+The smoke test checks the health endpoint, the web page, the FAQ and auth rejection. It then registers a throwaway user, logs in, saves preferences, fetches recommendations, Discover, item details and similar items, loads a catalog image, and runs a like swipe through to Outfits. If `pg` is installed (`npm install`), it also connects to Postgres directly (`DATABASE_URL`, defaulting to the Compose credentials), verifies the tables and catalog, and deletes the test user afterwards. It exits non-zero if any check fails.
+
 The client suite uses Vitest, jsdom, and Testing Library to verify the Suggested page expanded-item flow, including opening an item, keeping the close button above the transformed summary, and closing the expanded view.
 
 Run both test suites and the production client build with:
