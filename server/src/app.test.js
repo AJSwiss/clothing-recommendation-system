@@ -34,7 +34,7 @@ describe('database-backed API contracts', () => {
 
     expect(response.status).toBe(200);
     expect(query).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO user_preferences'), [
-      'user-1', ['black', 'black'], ['t-shirt'], ['straight-leg'], ['cotton']
+      'user-1', ['men'], ['black', 'black'], ['t-shirt'], ['straight-leg'], ['cotton']
     ]);
   });
 });
