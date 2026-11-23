@@ -1,0 +1,84 @@
+*   cc9a8bfd chore: merge changes from main
+|\  
+| *   f896c368 Merge pull request #10 from AJSwiss/dev
+| |\  
+| | *   03d21fbe Merge branch 'main' into dev
+| | |\  
+| | |/  
+| |/|   
+| * | c3239972 created simpled smoke test to run before use
+| | * 32941bff chore: remove unnecessary Microsoft directory
+* | |   a571ee80 chore: remove unecessary Microsoft PS cache
+|\ \ \  
+| | |/  
+| |/|   
+| * | de4f61f1 chore: ignore generated log files
+| * | a22b6ec4 chore: ignore macOS metadata files
+| * | de033bd8 feat: add onboarding selection count and limit feedback
+| * | 716dc116 feat: enforce onboarding preference selection limit of 5
+* | |   f79fb623 chore: remove unecessary Microsoft PS cache
+|\ \ \  
+* | | | c3cf0b99 chore: remove unecessary Microsoft PS cache
+| |/ /  
+|/| |   
+* | |   453ceb40 docs: merge README changes
+|\ \ \  
+| * | | 0378823b docs: added a bit more description in opening paragraph
+| * | | 14f9ceee docs: removed text about placeholders in App Pages
+* | | | 9fcd9089 feat: incorporate gender into match score
+|/ / /  
+* | | 758e4f11 [feat]: expand color options
+| | | * 00fa91f8 WIP on main: e251e01c chore: create faux merge conflict
+| | |/| 
+| | | * dab657fc index on main: e251e01c chore: create faux merge conflict
+| | |/  
+| | * e251e01c chore: create faux merge conflict
+| |/  
+| *   5a5c7126 Merge pull request #9 from AJSwiss/dev
+| |\  
+| |/  
+|/|   
+* |   a45e8c5f Merge pull request #8 from AJSwiss/feature-unit-tests
+|\ \  
+| |/  
+|/|   
+| * 34cd218a test: enhance unit tests for authentication and item interactions
+| * 61f9931d Add tests for API endpoints and database schema validation
+|/  
+*   90a280c4 Merge pull request #7 from AJSwiss/bugfix-suggested-expanded-exit
+|\  
+| * a7663e51 chore: update package-lock.json
+| * c98a414a chore: update version to 1.1.3 in package.json
+| * 2af33e52 fix: enhance close button styling for improved visibility and interaction
+* | 0dea3e17 Merge pull request #5 from AJSwiss/dev
+|\| 
+| * c53ab302 chore: update version to 1.1.2 in package.json and package-lock.json
+| * 1c20f664 Add image to Discover page description in README
+| * 3baad64d Replace screenshot placeholders with actual images
+| * 62053e36 docs: update README to include detailed app pages and onboarding flow
+| * 3466dcc2 chore: update package version to 1.1.0 in package.json
+| * 7460e66f chore: update client version to 1.1.0 in package-lock.json
+| * 1584391d chore: update package version to 1.1.0 in package-lock.json
+| * e2132acf chore: update package version to 1.1.0 and enhance UI components for improved user interaction and aesthetics
+| * 239d378d feat: enhance UI styling and layout for improved user experience in app and discover sections
+| * dec280ee feat: update Card component to improve item display and styling in Discover section
+| *   efee4105 Merge pull request #4 from AJSwiss/feature-github-actions-and-version-control
+| |\  
+| | * 74c0672e feat: implement CI/CD workflows with GitHub Actions for version control and Docker image publishing
+| |/  
+| * 8570755f feat: enhance authentication flow and improve UI interactions
+|/  
+*   78f06262 Merge pull request #3 from AJSwiss/feature-add-kaggle
+|\  
+| * 73851961 chore: more kaggle data 2
+| * 32ac45b6 chore: more kaggle images
+| * b6e9c96a feat: added kaggle dataset
+| * 9513cc0c chore: add kaggledata to .gitignore
+| * 0bebf6ab chore: update package.json for workspaces and allowScripts, add vite to server dependencies, and update jest version
+| * c0d81134 feat: initialize project with server and client workspaces
+|/  
+* 25368d86 Initial commit
+* 60ee78f0 Agent host session f00389e9-4f1c-48c1-a12d-bc5f09f673fa - baseline checkpoint
+* a66d6219 Agent host session 12397b69-b728-4ddf-9560-9e93a4074404 - baseline checkpoint
+* 993a7fd1 Agent host session 70abff8e-d01b-47c9-839b-0f059c0fa970 - baseline checkpoint
+* afa3bdae initial commit
