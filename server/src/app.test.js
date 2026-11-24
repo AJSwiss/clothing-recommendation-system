@@ -31,7 +31,7 @@ describe('database-backed API contracts', () => {
       .post('/api/auth/login')
       .send({email: 'unregistered@example.com', password: 'password123'});
     expect(query).toHaveBeenCalledTimes(1);
-    expect(response.status).toBe(999);
+    expect(response.status).toBe(401);
     expect(response.body.error).toMatch(/invalid email or password/i);
   });
 
