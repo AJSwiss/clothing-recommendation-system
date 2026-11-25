@@ -22,7 +22,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - name: Require a version bump
         run: npm run check:version -- "${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}"
@@ -55,7 +55,7 @@ jobs:
       - name: Run server tests with coverage report
         run: npm test -- --coverage
       - name: Run client tests
-        run: npm test --workspace client -- --pool=threads --no-file-parallelism
+        run: npm test --workspace client
       
       # Stage 5: Coverage report
       - name: Upload coverage report
