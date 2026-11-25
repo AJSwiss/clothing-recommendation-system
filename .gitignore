@@ -1,6 +1,7 @@
 node_modules/
 .env
 client/dist/
+coverage/
 kaggledata/
 .DS_Store
 *.log

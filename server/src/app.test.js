@@ -25,6 +25,16 @@ describe('database-backed API contracts', () => {
     expect(query).not.toHaveBeenCalled();
   });
 
+  test('rejects login from unregistered user', async () => {
+    query.mockResolvedValueOnce({ rows: [] });
+    const response = await request(app)
+      .post('/api/auth/login')
+      .send({email: 'unregistered@example.com', password: 'password123'});
+    expect(query).toHaveBeenCalledTimes(1);
+    expect(response.status).toBe(401);
+    expect(response.body.error).toMatch(/invalid email or password/i);
+  });
+
   test('writes normalized preferences with the authenticated user id', async () => {
     query.mockResolvedValueOnce({rows: [{user_id: 'user-1', preferred_colors: ['black']}]});
     const response = await request(app)
