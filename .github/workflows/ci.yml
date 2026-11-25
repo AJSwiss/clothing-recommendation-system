@@ -55,7 +55,7 @@ jobs:
       - name: Run server tests with coverage report
         run: npm test -- --coverage
       - name: Run client tests
-        run: npm test --workspace client
+        run: npm test --workspace client -- --pool=threads --no-file-parallelism
       
       # Stage 5: Coverage report
       - name: Upload coverage report
